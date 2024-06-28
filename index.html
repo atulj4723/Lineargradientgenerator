@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>linear gradient generator</title>
+    <style>
+        body{
+        height:100vh;
+        width:100vw;
+            background-image:linear-gradient(to bottom, #00ff00,#000000);
+        }
+        #btns{
+        display:flex;
+        gap:30px;
+        }
+        #content{
+      height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+        }
+        #btn2{
+        width:100px;
+        text-align:center;
+        height:20px;
+        border-radius:10px;
+            background-color:#000000;
+            color:white;
+        }
+        #btn1{
+        width:100px;
+        text-align:center;
+        height:20px;
+        border-radius:10px;
+            background-color:#00ff00;
+            color:white;
+        }
+        #copy{
+        background:rgba(255,255,255,0.1);
+        border:3px solid rgba(255,255,255,0.1);
+        padding:10px;
+        border-radius:10px;
+       margin:0 auto;
+       margin-top:20px;
+        width:400px;
+        }
+        #heading{
+            font-weight:900;
+            margin-bottom:30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div id="heading">LINEAR GRADIENT GENERATOR</div>
+    <div id="btns">
+        <div id="btn1">#00ff00</div>
+        <div id="btn2">#000000</div>
+    </div>
+    <p>To copy click on the text</p>
+    <div id="copy">
+        background-image:linear-gradient(to bottom, #00ff00,#000000);
+    </div>
+    </div>
+      <script>
+          let btn1=document.getElementById("btn1");
+          let btn2=document.getElementById("btn2");
+          let copy=document.getElementById("copy");
+          let body=document.body;
+          let colours="123456789ABCDEF";
+          let colourCode="#";
+          let rgb1="#00ff00";
+          let rgb2="#000000";
+          let code=0;
+          let directions=["top","bottom","right","left","top right","top left","bottom left","bottom right"];
+          let direction="top";
+          const colour =()=>{
+          colourCode="#";
+              for(let i=0;i<6;i++){
+                  code=Math.round(Math.random()*14);
+                  colourCode =colourCode + colours[code];
+                         }
+              return colourCode;
+          }
+          let change1=()=>{
+          rgb1="";
+              rgb1=colour();
+              direction=directions[Math.floor(Math.random()*8)];
+              body.style.backgroundImage=`linear-gradient(to ${direction},${rgb1},${rgb2})`;
+              copy.textContent=`background-image:linear-gradient(to ${direction}, ${rgb1},${rgb2});`;
+              btn1.textContent=rgb1;
+              btn1.style.background=rgb1;
+          }
+          let change2=()=>{
+               rgb2="";       
+               direction=directions[Math.floor(Math.random()*8)];
+              rgb2=colour();
+              body.style.backgroundImage=`linear-gradient(to ${direction},${rgb1},${rgb2})`;
+              copy.textContent=`background-image:linear-gradient(to ${direction}, ${rgb1},${rgb2});`;
+              btn2.style.background=rgb2;
+              btn2.textContent=rgb2;
+          }
+          btn1.addEventListener('click',change1);
+          btn2.addEventListener('click',change2);
+          copy.addEventListener('click',()=>{
+              navigator.clipboard.writeText(copy.innerText);
+          })
+      </script>
+</body>
+</html>
